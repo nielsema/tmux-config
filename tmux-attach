@@ -1,0 +1,15 @@
+#!/bin/mksh
+
+session=$1
+
+if [[ ! -f ~/.tmux/sessions/tmux-$session ]]; then
+    tmux new-session -s $session
+else
+    ~/.tmux/sessions/tmux-$session
+fi
+
+if [[ -n $TMUX ]]; then
+    tmux switch-client -t $session
+else
+    tmux attach-session -t $session
+fi
